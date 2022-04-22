@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  New Post
+{% endblock title %}
+
+{% block main %}
+  <h1 class="text-center mb-5">New Post</h1>
+  <div class="row justify-content-center">
+    <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-10">
+      <form action="{{ url_for('new_post') }}" method="post" class="needs-validation" novalidate>
+        <div class="form-floating mb-3">
+          <input type="text" name="title" class="form-control" id="title" maxlength="255" placeholder="Title" autofocus required>
+          <label for="title">Title<i class="text-danger">*</i></label>
+        </div>
+
+        <div class="form-floating my-3">
+          <textarea type="text" name="tldr" class="form-control" id="tldr" placeholder="TL;DR" maxlength="255"></textarea>
+          <label for="tldr">TL;DR <sup class="text-secondary fst-italic" style="--bs-text-opacity: .5;">(optional)</sup></label>
+        </div>
+
+        <div class="form-floating">
+          <textarea class="form-control" name="content" id="content" style="height: 200px" placeholder="Content" required>{{ content }}</textarea>
+          <label for="content">Content<i class="text-danger">*</i></label>
+        </div>
+
+        <div class="text-center my-3">
+          <button class="btn btn-primary" type="submit">Submit Post</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock main %}

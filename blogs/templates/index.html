@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    GL Blog
+{% endblock %}
+
+{% block main %}
+    {% if posts %}
+        {% if not session["user"] %}
+        <div class="alert alert-success alert-dismissible fade show text-center mb-5" role="alert">
+            <a href="{{ url_for('login') }}">Login</a> to make a new post!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+
+        {% set first = {'foo': True} %}
+        {% for post in posts | reverse %}
+        <!-- https://stackoverflow.com/questions/45699660/jinja2-reverse-a-list -->
+        <div class="row my-2 justify-content-center">
+            <div class="col-md-10">
+                    <!-- https://stackoverflow.com/questions/9486393/jinja2-change-the-value-of-a-variable-inside-a-loop -->
+                    {% if first.foo %}
+                        {% if first.update({'foo': False}) %}{% endif %}
+                    {% else %}
+                        <hr />
+                    {% endif %}
+
+                    <div class="row posts" style="transform: rotate(0);">
+                        <a href="{{ url_for('post', slug=post.slug) }}" class="h1 mb-1 stretched-link text-decoration-none post-title wrap">{{ post.title }}</a>
+
+                        <p>Posted by <b>{{ post.name }}</b> on <b>{{ post.created_at }}</b></p>
+
+                        {% if post.summary %}
+                            <p class="fs-5 wrap"><b>TL;DR:</b> <i class="text-secondary">{{ post.summary }}</i></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="row my-2 justify-content-center">
+            <div class="col-md-10">
+                <h1>No posts yet.
+                {% if not session["user"] %}
+                    Make the first post!</h1>
+                    <p class="fs-4"><a href="{{ url_for('register') }}">Register</a> or <a href="{{ url_for('login') }}">Login</a> to make a post.</p>
+                {% else %}
+                    <a href="{{ url_for('new_post') }}">Make the first post!</a></h1>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock main %}

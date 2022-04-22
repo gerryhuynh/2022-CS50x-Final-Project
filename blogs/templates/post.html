@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  {{ post.title }}
+{% endblock %}
+
+{% block main %}
+<div class="row my-2 justify-content-center">
+  <div class="col-md-10">
+    <div class="row">
+      <h1 class="display-4 text-center">{{ post.title }}</h1>
+    </div>
+
+    <div class="row">
+      <p class="text-center mb-1">Posted by <b>{{ post.name }}</b> on <b>{{ post.created_at }}</b></p>
+    </div>
+
+    {% if post.summary %}
+      <div class="row">
+        <p class="fs-5 mb-2 wrap"><b>TL;DR:</b> <i class="text-secondary text-wrap">{{ post.summary }}</i></p>
+      </div>
+    {% endif %}
+
+    <hr />
+
+    <div class="row justify-content-center my-4">
+      <div class="col">
+        <p class="wrap">
+          {{ post.content }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock main%}

@@ -1,0 +1,19 @@
+.posts {
+  min-height: 100px;
+}
+
+.post-title, .post-title:hover{
+  color: green;
+}
+
+.posts:hover {
+  background-color: #F5FCF9;
+  radius: 5px;
+  border-style: hidden;
+  border-radius: 5px;
+}
+
+p.wrap {
+  /* https://www.javatpoint.com/how-to-wrap-text-in-html */
+  word-wrap: break-word;
+}

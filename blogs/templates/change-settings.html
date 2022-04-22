@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+{% block title %}
+  Change {{ type }}
+{% endblock title %}
+{% block main %}
+  <div class="row justify-content-center">
+    <div class="col-xl-5 col-lg-8 col-md-12 border border-2 p-5" style="border-radius: 25px;">
+      <h2 class="mb-4 text-center">Change {{ type }}</h2>
+
+      <hr class="mb-5" />
+
+      {% if type != 'password' %}
+        <p class="mb-4"><b>Current {{ type }}:</b> {{ session["user"][type] }}</p>
+      {% endif %}
+
+      <form action="{{ url_for('change_settings', type=type)}}" method="post" class="needs-validation" novalidate>
+        <label for="name" class="form-label fw-bold">New {{ type }}</label>
+        {% if type == 'name' %}
+            <input type="text"
+                  name="new"
+                  id="name"
+                  class="form-control"
+                  autocomplete="off"
+                  required/>
+
+        {% elif type == 'email' %}
+            <input type="email"
+                   name="new"
+                   id="email"
+                   class="form-control"
+                   autocomplete="off"
+                   data-bs-toggle="tooltip"
+                   data-bs-trigger="focus"
+                   data-bs-placement="left"
+                   onkeyup="validateEmail(this)"
+                   required />
+
+        {% elif type == 'password' %}
+              <input type="password" name="new" id="password" class="form-control" autocomplete="off" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="left" data-bs-html="true" title="Password requirements" onkeydown="validatePassword(this)" onkeyup="validatePassword(this)" data-bs-content=" At least:
+                <br/>
+                - 8 characters
+                <br/>
+                - One uppercase character
+                <br/>
+                - One lowercase character
+                <br/>
+                - One number
+                <br/>
+                - One special character " required />
+              <div class="invalid-feedback" id="invalid-password">Please enter a password</div>
+
+              <label for="confirmation" class="form-label fw-bold mt-4">Confirm new password</label>
+              <input type="password"
+                     name="confirmation"
+                     id="confirmation"
+                     class="form-control"
+                     autocomplete="off"
+                     aria-describedby="confirmPassword"
+                     onkeydown="validateConfirm(this)"
+                     onkeyup="validateConfirm(this)"
+                     required/>
+              <div class="invalid-feedback" id="invalid-confirmation">Please confirm your password</div>
+        {% endif %}
+
+        {% if type == 'email' or type == 'password' %}
+          <label for="password" class="form-label fw-bold mt-4">Confirm current password</label>
+          <input type="password"
+                 class="form-control"
+                 id="password"
+                 name="current_password"
+                 autocomplete="off"
+                 required />
+        {% endif %}
+
+        <div class="text-center">
+          <button class="btn btn-primary mt-4" type="submit">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock main %}

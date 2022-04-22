@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+{% block title %}
+    Register
+{% endblock title %}
+{% block main %}
+<h1 class="text-center mb-5">Welcome to GL Blog!</h1>
+<div class="row justify-content-center">
+    <div class="col-xl-5 col-lg-8 col-md-12 border border-2 p-5"
+            style="border-radius: 25px;">
+        <h2 class="text-center mb-4">Register</h2>
+        <form action="/register" method="post" class="needs-validation" novalidate>
+            <div class="row mb-4">
+                <div class="col">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text"
+                            name="name"
+                            id="name"
+                            class="form-control"
+                            autocomplete="off"
+                            autofocus
+                            data-bs-toggle="tooltip"
+                            data-bs-trigger="focus"
+                            data-bs-placement="left"
+                            title="This is what we will call you!"
+                            required/>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback" id="invalid-name">Please enter your name</div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email"
+                            name="email"
+                            id="email"
+                            class="form-control"
+                            autocomplete="off"
+                            data-bs-toggle="tooltip"
+                            data-bs-trigger="focus"
+                            data-bs-placement="left"
+                            onkeyup="validateEmail(this)"
+                            title="You will use this to login!"
+                            required/>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback" id="invalid-email">Please enter an email</div>
+                </div>
+            </div>
+
+            <label for="password" class="form-label">Password</label>
+            <div class="row mb-4">
+                <div class="col-md-6 mb-2">
+                    <!-- https://getbootstrap.com/docs/5.1/components/popovers/
+                    https://getbootstrap.com/docs/5.1/components/tooltips/#examples -->
+                    <input type="password" name="password" id="password" class="form-control" autocomplete="off" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="left" data-bs-html="true" title="Password requirements" onkeydown="validatePassword(this)" onkeyup="validatePassword(this)" data-bs-content=" At least:
+                        <br/>
+                        - 8 characters
+                        <br/>
+                        - One uppercase character
+                        <br/>
+                        - One lowercase character
+                        <br/>
+                        - One number
+                        <br/>
+                        - One special character " required />
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback" id="invalid-password">Please enter a password</div>
+                </div>
+                <div class="col-md-6">
+                    <input type="password"
+                            name="confirmation"
+                            id="confirmation"
+                            class="form-control"
+                            autocomplete="off"
+                            aria-describedby="confirmPassword"
+                            onkeydown="validateConfirm(this)"
+                            onkeyup="validateConfirm(this)"
+                            required/>
+                    <div id="confirmPassword" class="form-text">Confirm password</div>
+                    <div class="valid-feedback">Passwords match!</div>
+                    <div class="invalid-feedback" id="invalid-confirmation">Please confirm your password</div>
+                </div>
+            </div>
+
+            <div class="text-center mb-4">
+                <button class="btn btn-primary" type="submit">Register</button>
+            </div>
+        </form>
+        <p class="text-center">
+            Already have an account? <a href="/login">Login here!</a>
+        </p>
+    </div>
+</div>
+{% endblock main %}

@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block title %}Log In{% endblock %}
+{% block main %}
+    <h1 class="text-center mb-5">Welcome to GL Blog!</h1>
+    <div class="row justify-content-center">
+        <div class="col-xl-5 col-lg-8 col-md-12 border border-2 p-5"
+             style="border-radius: 25px;">
+            <h2 class="text-center mb-4">Login</h2>
+            <form action="/login" method="post" class="needs-validation" novalidate>
+                <div class="row mb-4">
+                    <div class="col">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email"
+                               class="form-control"
+                               id="email"
+                               name="email"
+                               autocomplete="off"
+                               autofocus
+                               onkeyup="validateEmail(this)"
+                               required />
+                        <div class="invalid-feedback" id="invalid-email">Please enter a valid email</div>
+                    </div>
+                </div>
+                <div class="row mb-5">
+                    <div class="col">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password"
+                               class="form-control"
+                               id="password"
+                               name="password"
+                               autocomplete="off"
+                               required />
+                    </div>
+                </div>
+                <div class="text-center mb-4">
+                    <button class="btn btn-primary" type="submit">Log In</button>
+                </div>
+            </form>
+            <p class="text-center">
+                New user? <a href="/register">Register here!</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}
