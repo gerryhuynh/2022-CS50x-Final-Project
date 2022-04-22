@@ -1,3 +1,7 @@
+_This was my final project for the 2022 CS50x course. This project is now archived._
+
+---
+
 # GL Blog
 
 **TL;DR:** A full-stack blog site that uses many of the tools learned from CS50.
